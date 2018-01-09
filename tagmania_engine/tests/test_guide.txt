@@ -1,0 +1,43 @@
+
+Test all operators of tagmania, 
+
+^, $, *, . ,, etc.(I should introduce the (+) operator) 
+also add a repeat loop
+
+That is the one I want.
+
+test considerations:
+-false positives, false negatives, operators 
+
+i.e. string: "Give me a reason, why this is a test."
+     tagged_string: [(u'Give', u'VB'), (u'me', u'PRP'), (u'a', u'DT'), (u'reason', u'NN'), (u',', u','), (u'why', u'WRB'), (u'this', u'DT'), (u'is', u'VBZ'), (u'a', u'DT'), (u'test', u'NN'), (u'.', u'.')] 
+
+i.e. #2 string: "The Justice Department and the Department of Defense doesn't know what to do with itself."
+        tagged_string: [(u'The', u'DT'), (u'Justice', u'NNP'), (u'Department', u'NNP'), (u'and', u'CC'), (u'the', u'DT'), (u'Department', u'NNP'), (u'of', u'IN'), (u'Defense', u'NNP'), (u'does', u'VBZ'), (u"n't", u'RB'), (u'know', u'VB'), (u'what', u'WP'), (u'to', u'TO'), (u'do', u'VB'), (u'with', u'IN'), (u'itself', u'PRP'), (u'.', u'.')]
+ 
+
+patterns: 
+
+input string: "Give me a reason, why this is a test."
+tagged_string: [(u'Give', u'VB'), (u'me', u'PRP'), (u'a', u'DT'), (u'reason', u'NN'), (u',', u','), (u'why', u'WRB'), (u'this', u'DT'), (u'is', u'VBZ'), (u'a', u'DT'), (u'test', u'NN'), (u'.', u'.')]
+
+pattern:[u'DT NN']
+result:[(2, (u'a', u'DT')), (3, (u'reason', u'NN')), (8, (u'a', u'DT')), (9, (u'test', u'NN'))]
+
+
+*for each pattern , check matches, no matches   
+
+     -> false positive
+     -> false negative
+
+<^VB PRP> -caret operator
+<PERIOD$> -dollar operator
+<!NN PRP>  -not tests
+<VB PRP!> 
+<DT NN^^DT NN> -"far out" operator  (he said, oh damn right he did)
+<.{test}> - any test 
+<VB|VBZ> PRP|DT -optional tests
+VB{<Give>} PRP,VERB  -inner replace 
+<VB{<Give>}> <PRP>,COMMAND VERB NOUN  -multiple replace
+<DT? NNP|of*>,NERS   -star operator
+*also show an example of not using   

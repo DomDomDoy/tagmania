@@ -1,0 +1,143 @@
+
+
+MATCHING TESTS
+
+
+[(u'Give', u'VB'),
+ (u'me', u'PRP'),
+ (u'a', u'DT'),
+ (u'reason', u'NN'),
+ (u',', u','),
+ (u'why', u'WRB'),
+ (u'this', u'DT'),
+ (u'is', u'VBZ'),
+ (u'a', u'DT'),
+ (u'test', u'NN'),
+ (u'.', u'.')]
+
+
+Input/Output:
+
+rule:u"<DT NN>"
+valid:True
+output  = mods['to_delete']: 
+[(2, (u'a', u'DT')),
+(3, (u'reason', u'NN')),
+(8, (u'a', u'DT')),
+(9, (u'test', u'NN'))]
+
+Interpretation:
+
+
+ans = [(2, (u'a', u'DT')),
+(3, (u'reason', u'NN')),
+(8, (u'a', u'DT')),
+(9, (u'test', u'NN'))]
+
+
+if mods['to_delete'] != final:
+   -> matching error 	
+if valid is False:
+   -> false negative	
+
+Input/Output:
+
+rule:u"<^VB PRP>"
+valid:True
+output  = mods['to_delete']:
+[(0, (u'Give', u'VB')), 
+	 (1, (u'me', u'PRP'))]
+
+Interpretation:
+
+ans = [(0, (u'Give', u'VB')), 
+	   (1, (u'me', u'PRP'))]
+
+if mods['to_delete'] != final:
+   -> matching error 	
+if valid is False:
+   -> false negative
+
+
+Input/Output:
+rule:u"<PERIOD$>"
+valid:True
+output  = mods['to_delete']:
+[(10, (u'.', u'.'))]
+
+Interpretation:
+
+ans = [(10, (u'.', u'.'))]
+
+if mods['to_delete'] != final:
+   -> matching error 	
+if valid is False:
+   -> false negative
+
+Input/Output:
+rule:u"<VB> PRP!"
+valid:False
+output  = mods['to_delete']:
+[(10, (u'.', u'.'))]
+
+Interpretation:
+
+ans = [(10, (u'.', u'.'))]
+
+if mods['to_delete'] != final:
+   -> matching error 	
+if valid is False:
+   -> false negative
+
+
+Input/Output:
+rule:u"<VB|VBZ> PRP|DT, Nope"
+valid:True
+output = {'to_add': [(0, Tree('Nope', [(u'Give', u'VB')])),
+            (7, Tree('Nope', [(u'is', u'VBZ')]))],
+ 'to_delete': [(0, (u'Give', u'VB')), (7, (u'is', u'VBZ'))]} 
+
+
+Interpretation:
+
+ans = 'to_add': [(0, Tree('Nope', [(u'Give', u'VB')])),
+            (7, Tree('Nope', [(u'is', u'VBZ')]))],
+ 'to_delete': [(0, (u'Give', u'VB')), (7, (u'is', u'VBZ'))]}
+
+
+if mods['to_delete'] != final and mods['to_add'] != final:
+   -> matching error 	
+if valid is False:
+   -> false negative
+
+
+
+
+pattern:<VB> PRP!, Nope, valid:False
+{'to_add': [], 'to_delete': []}
+
+pattern:<VB|VBZ> PRP!, Nope, valid:False
+{'to_add': [], 'to_delete': []}
+
+pattern:<VB|VBZ> PRP|DT, Nope, valid:True
+{'to_add': [(0, Tree('Nope', [(u'Give', u'VB')])),
+            (7, Tree('Nope', [(u'is', u'VBZ')]))],
+ 'to_delete': [(0, (u'Give', u'VB')), (7, (u'is', u'VBZ'))]}
+
+
+
+
+
+
+TRANSFORMATION TESTS
+
+
+
+pattern:<PRP>, Nope, valid:True
+{'to_add': [(1, Tree('Nope', [(u'me', u'PRP')]))],
+ 'to_delete': [(1, (u'me', u'PRP'))]}
+pattern:<VB> PRP!, Nope, valid:False
+{'to_add': [], 'to_delete': []}
+pattern:<VB> DT!, Nope, valid:True
+{'to_add': [(0, Tree('Nope', [(u'Give', u'VB')]))],
+ 'to_delete': [(0, (u'Give', u'VB'))]}
