@@ -41,3 +41,9 @@ VB{<Give>} PRP,VERB  -inner replace
 <VB{<Give>}> <PRP>,COMMAND VERB NOUN  -multiple replace
 <DT? NNP|of*>,NERS   -star operator
 *also show an example of not using   
+
+
+
+
+Note: Sometimes during production, there are not resouces available to do annotation to improve a language model , or the max-ent model for the tagger, the solution to still being able to match all things necessary
+https://www.theguardian.com/world/2018/jan/21/germany-spd-gives-cautious-green-light-to-coalition-talks-with-merkel 

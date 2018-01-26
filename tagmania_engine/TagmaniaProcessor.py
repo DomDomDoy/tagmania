@@ -305,7 +305,7 @@ class TagmaniaProcessor:
 
         sub_tree = {'groups': lookinside, 'tags': self.tags}
         sub_processor = TagmaniaProcessor(tree=sub_tree, rule_class=self.rule_class)
-        valid, new_tuple_list = sub_processor.transform(tuple_list)
+        valid, mods,new_tuple_list = sub_processor.transform(tuple_list)
         if valid:
             num_tags = sub_processor.count_capture_groups()
             self.tags = self.tags[num_tags:]
