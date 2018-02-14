@@ -129,7 +129,9 @@ class TagmaniaProcessor:
         modifications = {'to_add': [], 'to_delete': []}
         priority_mods = {'to_add': [], 'to_delete': []}
         valid = True
+        plus_match = 0
         while grp_index < len(groups) and tup_index < len(self.tuple_list):
+            
             start = (tup_index == 0)
             end = (tup_index + 1 == len(self.tuple_list))
             group = groups[grp_index]
@@ -157,10 +159,15 @@ class TagmaniaProcessor:
                     to_add = [(i-0.2, ('[', tag)) for i,tag in zip(open_paren_matches, self.tags)]
                     self.tags = self.tags[len(open_paren_matches):]
                     modifications['to_add'] += to_add
-                if group['operator'] != '*':
+                if group['operator'] not in  ('*','+'):
                     grp_index += 1
+                if group['operator'] == '+':
+                   plus_match += 1 
                 tup_index = new_tup_index
             elif group['operator'] in ('?', '*'):
+                grp_index += 1
+            elif group['operator'] == '+' and plus_match >= 1: 
+                plus_match = 0
                 grp_index += 1
             else:
                 # If we get here, we have failed to match this group anywhere.
@@ -219,15 +226,20 @@ class TagmaniaProcessor:
         lookinside_matches = []
         starting_tup_index = tup_index
         ip_index = 0
+        plus_match = 0
         while ip_index < len(group['individual_patterns']) and tup_index < len(self.tuple_list):
             start = (tup_index == 0)
             end = (tup_index + 1 == len(self.tuple_list))
             ind_patt, tup = group['individual_patterns'][ip_index], self.tuple_list[tup_index]
             valid, new_tup = self.validate_individual_pattern(ind_patt, tup, start=start, end=end, grp_capture=group['capture'])
-            # Evaluate operator
+            # Evaluate operator 
             if not valid and ind_patt['operator'] in ('?', '*'):
                 ip_index += 1
                 continue
+            if not valid and ind_patt['operator'] == '+' and plus_match >= 1:
+                plus_match = 0
+                ip_index += 1
+                continue 
             if ind_patt['operator'] == '!':
                 valid = not valid
             if valid:
@@ -238,8 +250,10 @@ class TagmaniaProcessor:
                     matches.append((tup_index, tup))
                 if ind_patt['open_paren']:
                     open_paren_matches.append(tup_index)
-                if ind_patt['operator'] != '*':
+                if ind_patt['operator'] not in ('*','+'):
                     ip_index += 1
+                if ind_patt['operator'] == '+':
+                    plus_match += 1
                 tup_index += 1
             else:
                 if ind_patt['delimiter'] == '^^':

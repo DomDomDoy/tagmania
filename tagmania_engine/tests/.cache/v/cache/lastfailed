@@ -1,3 +1,5 @@
 {
-  "tagmania_tests.py::TestClass::()::test_two": true
+  "tagmania_tests.py::TestClass::()::test_two": true, 
+  "tagmania_tests.py::test_search_engine[VP{was} <PLACE$>,Tag1]": true, 
+  "tagmania_tests.py::test_tag_rule[<a NN|of*>, NER]": true
 }

@@ -3,10 +3,10 @@
 
 from collections import defaultdict
 import sys
-sys.path.append('../../')
+sys.path.append('../')
 from utils import load
 from functools import partial
-directory = 'tagmania/tagmania_engine/tagmania_constants'
+directory = 'tagmania_engine/tagmania_constants'
 load_const =  partial(load, directory)
 
 PUNCT = {'PERIOD':'.', 

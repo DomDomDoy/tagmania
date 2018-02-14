@@ -1,3 +1,6 @@
+list
 <this is>,THIS
 ^THIS <is> <a? test>,VERB TEST
 He is the <CD{one}> guy!,NN
+<a NN|NNP|NNS of? CD CD|SYM*>,NUMBERY_ENTITIES
+<a NN|NNP|NNS of? CD! JJ* a|NN|NNP|NNS*>,NER

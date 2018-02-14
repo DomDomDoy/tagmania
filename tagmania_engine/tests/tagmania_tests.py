@@ -7,7 +7,6 @@ for each class, test of individual pattern level as well as group level
 
 """
 import spacy, sys,pytest 
-from beaut_scraping import get_paragraphs
 from nltk.tree import Tree
 sys.path.append('../')
 from TagmaniaProcessor import TagmaniaProcessor, ptt
@@ -29,11 +28,11 @@ tagged_text1 = [(u'Give', u'VB'),
 
 tagged_text2 = [(u'he',u'PRP'),
                 Tree('VP',[(u'was',u'VBZ'),(u'going','VBZ')]), 
+                Tree('VP',[(u'to',u'IN'),(u'bike','VBZ')]),
                 (u'there',u'PLACE')]
 
 @pytest.mark.parametrize('test_rule,tagged,expected_del,expected_add', [
 
-       	 
     pytest.param(u'<DT NN>,Nope',
                tagged_text1,
                [(2, (u'a', u'DT')), (3, (u'reason', u'NN')), (8, (u'a', u'DT')), (9, (u'test', u'NN'))],
@@ -42,60 +41,74 @@ tagged_text2 = [(u'he',u'PRP'),
 	       id='<DT NN>,Nope' ),
 
     pytest.param(u'<^VB PRP>,Nope',
-                   tagged_text1,
-                   [(0, (u'Give', u'VB')), (1, (u'me', u'PRP'))],
-                   [(0, Tree('Nope', [(u'Give', u'VB'), (u'me', u'PRP')]))],
-                   marks=[pytest.mark.basic],
-                   id='<^VB PRP>,Nope' ),
+		   tagged_text1,
+		   [(0, (u'Give', u'VB')), (1, (u'me', u'PRP'))],
+		   [(0, Tree('Nope', [(u'Give', u'VB'), (u'me', u'PRP')]))],
+		   marks=[pytest.mark.basic],
+		   id='<^VB PRP>,Nope' ),
 
     pytest.param(u'<PERIOD$>,Nope',
-                   tagged_text1,
-                   [(12, (u'.', u'.'))],
-                   [(12, Tree('Nope', [(u'.', u'.')]))],
-                   marks=[pytest.mark.basic],
-                   id='<PERIOD$>,Nope' ),
+		   tagged_text1,
+		   [(12, (u'.', u'.'))],
+		   [(12, Tree('Nope', [(u'.', u'.')]))],
+		   marks=[pytest.mark.basic],
+		   id='<PERIOD$>,Nope' ),
 
     pytest.param(u'<VB|VBZ> PRP|DT,Nope',
-                   tagged_text1,
-                   [(0, (u'Give', u'VB')), (7, (u'is', u'VBZ'))],
-                   [(0, Tree('Nope', [(u'Give', u'VB')])), (7, Tree('Nope', [(u'is', u'VBZ')]))],
-                   marks=[pytest.mark.basic],
-                   id='<VB|VBZ> PRP|DT,Nope' ),
+		   tagged_text1,
+		   [(0, (u'Give', u'VB')), (7, (u'is', u'VBZ'))],
+		   [(0, Tree('Nope', [(u'Give', u'VB')])), (7, Tree('Nope', [(u'is', u'VBZ')]))],
+		   marks=[pytest.mark.basic],
+		   id='<VB|VBZ> PRP|DT,Nope' ),
 
     pytest.param(u'<VB> DT!,Nope',
-                   tagged_text1,
-                   [(0, (u'Give', u'VB'))],
-                   [(0, Tree('Nope', [(u'Give', u'VB')]))],
-                   marks=[pytest.mark.basic],
-                   id='<VB> DT!,Nope' ),
+		   tagged_text1,
+		   [(0, (u'Give', u'VB'))],
+		   [(0, Tree('Nope', [(u'Give', u'VB')]))],
+		   marks=[pytest.mark.basic],
+		   id='<VB> DT!,Nope' ),
 
     pytest.param(u'<VP{was}>,Nope',
-                   tagged_text2,
-                   [(1, Tree('VP', [(u'was', u'VBZ'), (u'going', 'VBZ')]))],
-                   [(1, Tree('Nope', [Tree('VP', [(u'was', u'VBZ'), (u'going', 'VBZ')])]))],
-                   marks=[pytest.mark.basic],
-                   id='<VP{was}>,Nope' ),
+		   tagged_text2,
+		   [(1, Tree('VP', [(u'was', u'VBZ'), (u'going', 'VBZ')]))],
+		   [(1, Tree('Nope', [Tree('VP', [(u'was', u'VBZ'), (u'going', 'VBZ')])]))],
+		   marks=[pytest.mark.basic],
+		   id='<VP{was}>,Nope' ),
 
-    pytest.param(u'VP{was} <PLACE$>,Tag1',
-                   tagged_text2,
-                   [(2, (u'there', u'PLACE'))],
-                   [(2, Tree('Tag1', [(u'there', u'PLACE')]))],
-                   marks=[pytest.mark.basic],
-                   id='VP{was} <PLACE$>,Tag1' ),
+    pytest.param(u'VP{was}^^<PLACE$>,Tag1',
+		   tagged_text2,
+		   [(3, (u'there', u'PLACE'))],
+		   [(3, Tree('Tag1', [(u'there', u'PLACE')]))],
+		   marks=[pytest.mark.basic],
+		   id='VP{was}^^<PLACE$>,Tag1' ),
 
     pytest.param(u'<VB> PRP!,Nope',
-                   tagged_text1,
-                   [],
-                   [],
-                   marks=[pytest.mark.basic,pytest.mark.xfail(reason='no matching pattern')],
-                   id='<VB> PRP!,Nope' ),
+		   tagged_text1,
+		   [],
+		   [],
+		   marks=[pytest.mark.basic,pytest.mark.xfail(reason='no matching pattern')],
+		   id='<VB> PRP!,Nope' ),
 
     pytest.param(u'<a NN|of*>, NER',
-                   tagged_text1,
-                   [(2, (u'a', u'DT')), (3, (u'reason', u'NN')), (8, (u'a', u'DT')), (9, (u'test', u'NN')), (10, (u'of', u'of')), (11, (u'grandeur', u'NN'))],
-                   [(2, Tree('NER', [(u'a', u'DT'), (u'reason', u'NN')])), (8, Tree('NER', [(u'a', u'DT'), (u'test', u'NN'), (u'of', u'of'), (u'grandeur', u'NN')]))],
-                   marks=[pytest.mark.basic],
-                   id='<a NN|of*>, NER' ),
+		   tagged_text1,
+		   [(2, (u'a', u'DT')), (3, (u'reason', u'NN')), (8, (u'a', u'DT')), (9, (u'test', u'NN')), (10, (u'of', u'of')), (11, (u'grandeur', u'NN'))],
+		   [(2, Tree('NER', [(u'a', u'DT'), (u'reason', u'NN')])), (8, Tree('NER', [(u'a', u'DT'), (u'test', u'NN'), (u'of', u'of'), (u'grandeur', u'NN')]))],
+		   marks=[pytest.mark.basic],
+		   id='<a NN|of*>, NER' ),
+
+    pytest.param(u'<she VP+>, PRONOUN_COPULA',
+		   tagged_text2,
+		   [],
+		   [],
+		   marks=[pytest.mark.basic,pytest.mark.xfail(reason='no matching pattern')],
+		   id='<she VP+>, PRONOUN_COPULA' ),
+
+    pytest.param(u'<he VP+>, PRONOUN_COPULA',
+		   tagged_text2,
+		   [(0, (u'he', u'PRP')), (1, Tree('VP', [(u'was', u'VBZ'), (u'going', 'VBZ')])), (2, Tree('VP', [(u'to', u'IN'), (u'bike', 'VBZ')]))],
+		   [(0, Tree('PRONOUN_COPULA', [(u'he', u'PRP'), Tree('VP', [(u'was', u'VBZ'), (u'going', 'VBZ')]), Tree('VP', [(u'to', u'IN'), (u'bike', 'VBZ')])]))],
+		   marks=[pytest.mark.basic],
+		   id='<he VP+>, PRONOUN_COPULA' ),   	 
     ]) 
    
 def test_search_engine(test_rule,tagged,expected_del,expected_add):
@@ -158,9 +171,11 @@ if __name__ == '__main__':
             {'patt':u'<VB|VBZ> PRP|DT,Nope','sample':'tagged_text1','marx':'[pytest.mark.basic]'},
             {'patt':u'<VB> DT!,Nope','sample':'tagged_text1','marx':'[pytest.mark.basic]'},
             {'patt':u'<VP{was}>,Nope','sample':'tagged_text2','marx':'[pytest.mark.basic]'},    
-            {'patt':u'VP{was} <PLACE$>,Tag1','sample':'tagged_text2','marx':'[pytest.mark.basic]'},    
+            {'patt':u'VP{was}^^<PLACE$>,Tag1','sample':'tagged_text2','marx':'[pytest.mark.basic]'},    
             {'patt':u'<VB> PRP!,Nope','marx':"[pytest.mark.basic,pytest.mark.xfail(reason='no matching pattern')]",'sample':'tagged_text1'},
-            {'patt':u'<a NN|of*>, NER','sample':'tagged_text1','marx':'[pytest.mark.basic]'},] 
+            {'patt':u'<a NN|of*>, NER','sample':'tagged_text1','marx':'[pytest.mark.basic]'},
+            {'patt':u'<she VP+>, PRONOUN_COPULA','sample':'tagged_text2','marx':"[pytest.mark.basic,pytest.mark.xfail(reason='no matching pattern')]"},
+            {'patt':u'<he VP+>, PRONOUN_COPULA','sample':'tagged_text2','marx':"[pytest.mark.basic]"}] 
 
    #pprint.pprint(tagged_text1)
    

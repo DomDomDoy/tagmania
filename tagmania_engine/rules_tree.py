@@ -120,7 +120,6 @@ def get_rules(name, input_list):
     
     
     
-    
     rule_list = rule_dict[name]
     root = get_rules.trees[name]
     tags = get_rules.tags_dict[name]
