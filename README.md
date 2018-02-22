@@ -362,7 +362,5 @@ Tagmania is very much still in production and the rule processing needs some wor
  
 
 ### Dependencies 
-nltk,spacy
-cytoolz
-parsimonious
+nltk,spacy,cytoolz,parsimonious
 
