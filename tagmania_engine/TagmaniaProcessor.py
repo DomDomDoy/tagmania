@@ -231,6 +231,7 @@ class TagmaniaProcessor:
             start = (tup_index == 0)
             end = (tup_index + 1 == len(self.tuple_list))
             ind_patt, tup = group['individual_patterns'][ip_index], self.tuple_list[tup_index]
+            
             valid, new_tup = self.validate_individual_pattern(ind_patt, tup, start=start, end=end, grp_capture=group['capture'])
             # Evaluate operator 
             if not valid and ind_patt['operator'] in ('?', '*'):

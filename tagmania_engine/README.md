@@ -59,3 +59,6 @@ In this rule, every group consists of only one individual pattern, and hence no 
      - if tagmania is in POS-tagging mode, it will change the tag of the captured chunk from ADVERBIAL to AGENT
      - if tagmania is in chunking mode, it will replace the captured chunk with a new chunk whose tag is AGENT and whose sole child chunk is the captured chunk
 
+## Testing 
+
+see test directory for pytests, in order to generate new parameters given the sample pos tag lists, run the file as a normal python file and then copy and paste the output into the parameterized constructor of pytest

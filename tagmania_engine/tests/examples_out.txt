@@ -1,0 +1,300 @@
+[(u'I', u'PRP'),
+ (u'am', u'VBP'),
+ (u'looking', u'VBG'),
+ (u'for', u'IN'),
+ (u'a', u'DT'),
+ (u'secretary', u'NN'),
+ (u'who', u'WP'),
+ (u'can', u'MD'),
+ (u'use', u'VB'),
+ (u'a', u'DT'),
+ (u'computer', u'NN'),
+ (u'well', u'UH'),
+ (u'.', u'.')]
+Out:
+[Tree('Subject', [Tree('Pronoun', [(u'I', u'PRP')])]),
+ Tree('ACTION', [Tree('Gerund', [(u'am', u'VBP'), (u'looking', u'VBG')])]),
+ (u'for', u'IN'),
+ Tree('Object', [(u'a', u'DT'), (u'secretary', u'NN')]),
+ (u'who', u'WP'),
+ (u'can', u'MD'),
+ (u'use', u'VB'),
+ Tree('Object', [(u'a', u'DT'), (u'computer', u'NN')]),
+ (u'well', u'UH'),
+ (u'.', u'.')]
+applied rules
+[u'<I|she|he|we|you|they>,Pronoun',
+ u'<DT JJ? NN|NNP|NNS>,Object',
+ u'<^Pronoun|Object>,Subject',
+ u'<is|was|were|are|am VBG>,Gerund',
+ u'Subject <Gerund|VBZ|VBP|VBD>, ACTION']
+----------------------------------------------------
+
+[(u'She', u'PRP'),
+ (u'has', u'VBZ'),
+ (u'a', u'DT'),
+ (u'son', u'NN'),
+ (u'that', u'WDT'),
+ (u'is', u'VBZ'),
+ (u'a', u'DT'),
+ (u'doctor', u'NN'),
+ (u'.', u'.')]
+Out:
+[Tree('Subject', [Tree('Pronoun', [(u'She', u'PRP')])]),
+ Tree('ACTION', [(u'has', u'VBZ')]),
+ Tree('Object', [(u'a', u'DT'), (u'son', u'NN')]),
+ (u'that', u'WDT'),
+ (u'is', u'VBZ'),
+ Tree('Object', [(u'a', u'DT'), (u'doctor', u'NN')]),
+ (u'.', u'.')]
+applied rules
+[u'<I|she|he|we|you|they>,Pronoun',
+ u'<DT JJ? NN|NNP|NNS>,Object',
+ u'<^Pronoun|Object>,Subject',
+ u'Subject <Gerund|VBZ|VBP|VBD>, ACTION']
+----------------------------------------------------
+
+[(u'We', u'PRP'),
+ (u'bought', u'VBD'),
+ (u'a', u'DT'),
+ (u'house', u'NN'),
+ (u'which', u'WDT'),
+ (u'is', u'VBZ'),
+ (u'200', u'CD'),
+ (u'years', u'NNS'),
+ (u'old', u'JJ'),
+ (u'.', u'.')]
+Out:
+[Tree('Subject', [Tree('Pronoun', [(u'We', u'PRP')])]),
+ Tree('ACTION', [(u'bought', u'VBD')]),
+ Tree('Object', [(u'a', u'DT'), (u'house', u'NN')]),
+ (u'which', u'WDT'),
+ (u'is', u'VBZ'),
+ (u'200', u'CD'),
+ (u'years', u'NNS'),
+ (u'old', u'JJ'),
+ (u'.', u'.')]
+applied rules
+[u'<I|she|he|we|you|they>,Pronoun',
+ u'<DT JJ? NN|NNP|NNS>,Object',
+ u'<^Pronoun|Object>,Subject',
+ u'Subject <Gerund|VBZ|VBP|VBD>, ACTION']
+----------------------------------------------------
+
+[(u'I', u'PRP'),
+ (u'sent', u'VBD'),
+ (u'a', u'DT'),
+ (u'letter', u'NN'),
+ (u'which', u'WDT'),
+ (u'arrived', u'VBD'),
+ (u'three', u'CD'),
+ (u'weeks', u'NNS'),
+ (u'later', u'RB'),
+ (u'.', u'.')]
+Out:
+[Tree('Subject', [Tree('Pronoun', [(u'I', u'PRP')])]),
+ Tree('ACTION', [(u'sent', u'VBD')]),
+ Tree('Object', [(u'a', u'DT'), (u'letter', u'NN')]),
+ (u'which', u'WDT'),
+ (u'arrived', u'VBD'),
+ (u'three', u'CD'),
+ (u'weeks', u'NNS'),
+ (u'later', u'RB'),
+ (u'.', u'.')]
+applied rules
+[u'<I|she|he|we|you|they>,Pronoun',
+ u'<DT JJ? NN|NNP|NNS>,Object',
+ u'<^Pronoun|Object>,Subject',
+ u'Subject <Gerund|VBZ|VBP|VBD>, ACTION']
+----------------------------------------------------
+
+[(u'The', u'DT'),
+ (u'people', u'NNS'),
+ (u'that', u'WDT'),
+ (u'live', u'VBP'),
+ (u'on', u'IN'),
+ (u'the', u'DT'),
+ (u'island', u'NN'),
+ (u'are', u'VBP'),
+ (u'very', u'RB'),
+ (u'friendly', u'JJ'),
+ (u'.', u'.')]
+Out:
+[Tree('Subject', [Tree('Object', [(u'The', u'DT'), (u'people', u'NNS')])]),
+ (u'that', u'WDT'),
+ Tree('VP', [(u'live', u'VBP')]),
+ (u'on', u'IN'),
+ Tree('Object', [(u'the', u'DT'), (u'island', u'NN')]),
+ Tree('ACTION', [(u'are', u'VBP')]),
+ (u'very', u'RB'),
+ (u'friendly', u'JJ'),
+ (u'.', u'.')]
+applied rules
+[u'<DT JJ? NN|NNP|NNS>,Object',
+ u'<^Pronoun|Object>,Subject',
+ u'Subject that|who|which <Gerund|VBZ|VBP|VBD>^^<VBZ|VBP|VBD>,VP ACTION']
+----------------------------------------------------
+
+[(u'The', u'DT'),
+ (u'man', u'NN'),
+ (u'who', u'WP'),
+ (u'phoned', u'VBD'),
+ (u'is', u'VBZ'),
+ (u'my', u'PRP$'),
+ (u'brother', u'NN'),
+ (u'.', u'.')]
+Out:
+[Tree('Subject', [Tree('Object', [(u'The', u'DT'), (u'man', u'NN')])]),
+ (u'who', u'WP'),
+ Tree('VP', [(u'phoned', u'VBD')]),
+ Tree('ACTION', [(u'is', u'VBZ')]),
+ (u'my', u'PRP$'),
+ (u'brother', u'NN'),
+ (u'.', u'.')]
+applied rules
+[u'<DT JJ? NN|NNP|NNS>,Object',
+ u'<^Pronoun|Object>,Subject',
+ u'Subject that|who|which <Gerund|VBZ|VBP|VBD>^^<VBZ|VBP|VBD>,VP ACTION']
+----------------------------------------------------
+
+[(u'The', u'DT'),
+ (u'camera', u'NN'),
+ (u'which', u'WDT'),
+ (u'costs', u'VBZ'),
+ (u'\xa3', u'$'),
+ (u'100', u'CD'),
+ (u'is', u'VBZ'),
+ (u'over', u'IN'),
+ (u'there', u'RB'),
+ (u'.', u'.')]
+Out:
+[Tree('Subject', [Tree('Object', [(u'The', u'DT'), (u'camera', u'NN')])]),
+ (u'which', u'WDT'),
+ Tree('VP', [(u'costs', u'VBZ')]),
+ (u'\xa3', u'$'),
+ (u'100', u'CD'),
+ Tree('ACTION', [(u'is', u'VBZ')]),
+ (u'over', u'IN'),
+ (u'there', u'RB'),
+ (u'.', u'.')]
+applied rules
+[u'<DT JJ? NN|NNP|NNS>,Object',
+ u'<^Pronoun|Object>,Subject',
+ u'Subject that|who|which <Gerund|VBZ|VBP|VBD>^^<VBZ|VBP|VBD>,VP ACTION']
+----------------------------------------------------
+
+[(u'The', u'DT'),
+ (u'house', u'NN'),
+ (u'that', u'WDT'),
+ (u'belongs', u'VBZ'),
+ (u'to', u'IN'),
+ (u'Julie', u'NNP'),
+ (u'is', u'VBZ'),
+ (u'in', u'IN'),
+ (u'London', u'NNP'),
+ (u'.', u'.')]
+Out:
+[Tree('Subject', [Tree('Object', [(u'The', u'DT'), (u'house', u'NN')])]),
+ (u'that', u'WDT'),
+ Tree('VP', [(u'belongs', u'VBZ')]),
+ (u'to', u'IN'),
+ (u'Julie', u'NNP'),
+ Tree('ACTION', [(u'is', u'VBZ')]),
+ (u'in', u'IN'),
+ (u'London', u'NNP'),
+ (u'.', u'.')]
+applied rules
+[u'<DT JJ? NN|NNP|NNS>,Object',
+ u'<^Pronoun|Object>,Subject',
+ u'Subject that|who|which <Gerund|VBZ|VBP|VBD>^^<VBZ|VBP|VBD>,VP ACTION']
+----------------------------------------------------
+
+[(u'The', u'DT'),
+ (u'bill', u'NN'),
+ (u'passed', u'VBD'),
+ (u'81', u'CD'),
+ (u'-', u'SYM'),
+ (u'18', u'CD'),
+ (u'.', u'.'),
+ (u'Sixteen', u'CD'),
+ (u'Democrats', u'NNPS'),
+ (u'and', u'CC'),
+ (u'two', u'CD'),
+ (u'libertarian', u'JJ'),
+ (u'-', u'HYPH'),
+ (u'minded', u'JJ'),
+ (u'Republicans', u'NNPS'),
+ (u'voted', u'VBD'),
+ (u'against', u'IN'),
+ (u'it', u'PRP'),
+ (u'.', u'.'),
+ (u'Among', u'IN'),
+ (u'them', u'PRP'),
+ (u'were', u'VBD'),
+ (u'a', u'DT'),
+ (u'number', u'NN'),
+ (u'of', u'IN'),
+ (u'potential', u'JJ'),
+ (u'Democratic', u'JJ'),
+ (u'presidential', u'JJ'),
+ (u'candidates', u'NNS'),
+ (u'in', u'IN'),
+ (u'2020', u'CD'),
+ (u'including', u'VBG'),
+ (u'Cory', u'NNP'),
+ (u'Booker', u'NNP'),
+ (u',', u','),
+ (u'Kirsten', u'NNP'),
+ (u'Gillibrand', u'NNP'),
+ (u',', u','),
+ (u'Kamala', u'NNP'),
+ (u'Harris', u'NNP'),
+ (u',', u','),
+ (u'Bernie', u'NNP'),
+ (u'Sanders', u'NNP'),
+ (u'and', u'CC'),
+ (u'Elizabeth', u'NNP'),
+ (u'Warren', u'NNP')]
+Out:
+[(u'The', u'DT'),
+ (u'bill', u'NN'),
+ (u'passed', u'VBD'),
+ (u'81', u'CD'),
+ (u'-', u'SYM'),
+ (u'18', u'CD'),
+ (u'.', u'.'),
+ (u'Sixteen', u'CD'),
+ (u'Democrats', u'NNPS'),
+ (u'and', u'CC'),
+ (u'two', u'CD'),
+ (u'libertarian', u'JJ'),
+ (u'-', u'HYPH'),
+ (u'minded', u'JJ'),
+ (u'Republicans', u'NNPS'),
+ (u'voted', u'VBD'),
+ (u'against', u'IN'),
+ (u'it', u'PRP'),
+ (u'.', u'.'),
+ (u'Among', u'IN'),
+ (u'them', u'PRP'),
+ (u'were', u'VBD'),
+ (u'a', u'DT'),
+ (u'number', u'NN'),
+ (u'of', u'IN'),
+ (u'potential', u'JJ'),
+ (u'Democratic', u'JJ'),
+ (u'presidential', u'JJ'),
+ (u'candidates', u'NNS'),
+ (u'in', u'IN'),
+ (u'2020', u'CD'),
+ (u'including', u'VBG'),
+ Tree('PERSON_LISTING', [Tree('PERSON', [(u'Cory', u'NNP'), (u'Booker', u'NNP')]), (u',', u','), Tree('PERSON', [(u'Kirsten', u'NNP'), (u'Gillibrand', u'NNP')]), (u',', u','), Tree('PERSON', [(u'Kamala', u'NNP'), (u'Harris', u'NNP')]), (u',', u','), Tree('PERSON', [(u'Bernie', u'NNP'), (u'Sanders', u'NNP')]), (u'and', u'CC'), Tree('PERSON', [(u'Elizabeth', u'NNP'), (u'Warren', u'NNP')])])]
+applied rules
+[u'<Cory Booker>,PERSON',
+ u'<Kirsten Gillibrand>,PERSON',
+ u'<Kamala Harris>,PERSON',
+ u'<Elizabeth Warren>,PERSON',
+ u'PERSON PERSON|COMMA+ <NNP+> and PERSON,PERSON',
+ u'<PERSON COMMA|PERSON+ and PERSON>,PERSON_LISTING']
+----------------------------------------------------
+
