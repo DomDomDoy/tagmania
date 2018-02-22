@@ -124,6 +124,7 @@ The bill passed 81-18. Sixteen Democrats and two libertarian-minded Republicans 
 
 pos_tagged by spacey:
 
+<CODE>
 
 [(u'81-', u'PERCENT'),
  (u'Sixteen', u'CARDINAL'),
@@ -187,51 +188,60 @@ pos_tagged by spacey:
  (u'Warren', u'NNP'),
  (u'.', u'.')]
 
-
+</CODE>
 
 Take:
- ...
+
+<CODE>
+...
  (u'81', u'CD'),
  (u'-', u'SYM'),
  (u'18', u'CD'),
- ...    
+ ... 
+	
+</CODE>	
 Let's say I wanted to consider CD SYM CD as simply a CD , then I would write a rule as such: 
+
+<CODE>
 
 <CD SYM CD>, CD 
 
+</CODE>
 
 out:
+<CODE>
 ...
 Tree('CD', [(u'81', u'CD'), (u'-', u'SYM'), (u'18', u'CD')]),
 ...
-
+</CODE>
 or 
 
 let's say you trust the people that the spacey NER spits out , tags, and insert them into the tags, as such: 
+
+<CODE>
 pers =  [(u'Cory Booker', u'PERSON'),
  (u'Kirsten Gillibrand', u'PERSON'),
  (u'Kamala Harris', u'PERSON'),
  (u'Bernie Sanders', u'ORG'),
  (u'Elizabeth Warren', u'PERSON')]
 
-
+</CODE>
 
 so after getting the NER of names from spacey, 
 we can insert them into 
 
+<CODE>
+
 for text,tag in pers:
 	<text>,PERSON
-
+</CODE>
 Now imagine, we want to be able to group PERSONS and call them a PERSON_LISTING  
 
-then to create these gro
 <(PERSON COMMA PERSON)+>,PERSON_LISTING  
 
 
-
-
 taking a look at the output of our rule set we get the following: 
-
+<CODE>
 ... 
  (u'in', u'IN'),
  (u'2020', u'CD'),
@@ -242,26 +252,28 @@ taking a look at the output of our rule set we get the following:
  (u'and', u'CC'),
  Tree('PERSON', [(u'Elizabeth', u'NNP'), (u'Warren', u'NNP')]),
 
-
+</CODE>
 
 
 
 It looks like as if now, Bernie sanders wasn't considered as a Person and left behind as a NNP!. Well with the following tagmania rule we can fix that....   
+<CODE>
 
 PERSON PERSON|COMMA+ <NNP+> and PERSON,PERSON
-
+</CODE>
 Now that Bernie Sanders , is a Person 
-
+<CODE>
 Tree('PERSON', [(u'Bernie', u'NNP'), (u'Sanders', u'NNP')])
-
+</CODE>
 Let's group these people into an abstract notion called PERSON_LISTING 
 
-
+<CODE>
 <PERSON COMMA|PERSON+ and PERSON>,PERSON_LISTING
-
+</CODE>
 once you run that rule you get the following output...
-..... 
- ... 	
+
+<CODE>
+..... 	
  (u'number', u'NN'),
  (u'of', u'IN'),
  (u'potential', u'JJ'),
@@ -273,6 +285,7 @@ once you run that rule you get the following output...
  (u'including', u'VBG'),
  Tree('PERSON_LISTING', [Tree('PERSON', [(u'Cory', u'NNP'), (u'Booker', u'NNP')]), (u',', u','), Tree('PERSON', [(u'Kirsten', u'NNP'), (u'Gillibrand', u'NNP')]), (u',', u','), Tree('PERSON', [(u'Kamala', u'NNP'), (u'Harris', u'NNP')]), (u',', u','), Tree('PERSON', [(u'Bernie', u'NNP'), (u'Sanders', u'NNP')]), (u'and', u'CC'), Tree('PERSON', [(u'Elizabeth', u'NNP'), (u'Warren', u'NNP')])])]
 
+</CODE>
 
 Which allows for very easy tokenizing.
 
@@ -297,18 +310,21 @@ The house that belongs to Julie is in London.
 
 .... So using the following rules, 
 
+<CODE>
 <I|she|he|we|you|they>,Pronoun
 <DT JJ? NN|NNP|NNS>,Object
 <^Pronoun|Object>,Subject
 <is|was|were|are|am VBG>,Gerund
 Subject that|who|which <Gerund|VBZ|VBP|VBD>^^<VBZ|VBP|VBD>,VP ACTION  
 Subject <Gerund|VBZ|VBP|VBD>, ACTION 
-
+</CODE>
 I can start to write rules based on linguistic phenomenon , to manipulate the tags accordingly. 
 as seen. 
 
 i.e. 
 In:
+
+<CODE>
 [(u'The', u'DT'),
  (u'man', u'NN'),
  (u'who', u'WP'),
@@ -317,7 +333,9 @@ In:
  (u'my', u'PRP$'),
  (u'brother', u'NN'),
  (u'.', u'.')]
+</CODE>
 Out:
+<CODE>
 [Tree('Subject', [Tree('Object', [(u'The', u'DT'), (u'man', u'NN')])]),
  (u'who', u'WP'),
  Tree('VP', [(u'phoned', u'VBD')]),
@@ -325,11 +343,13 @@ Out:
  (u'my', u'PRP$'),
  (u'brother', u'NN'),
  (u'.', u'.')]
+</CODE>	
 applied rules
+<CODE>
 [u'<DT JJ? NN|NNP|NNS>,Object',
  u'<^Pronoun|Object>,Subject',
  u'Subject that|who|which <Gerund|VBZ|VBP|VBD>^^<VBZ|VBP|VBD>,VP ACTION']
-
+</CODE>
  
 (to see full output, run tagmania_examples in /tests or see examples_out.txt)  
 
@@ -342,7 +362,7 @@ Tagmania is very much still in production and the rule processing needs some wor
  
 
 ### Dependencies 
-nltk,spacy (for tree object or generating pos tagged examples from strings) 
+nltk,spacy
 cytoolz
 parsimonious
 
