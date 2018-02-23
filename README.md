@@ -1,4 +1,16 @@
+
+
+
+
+
 # Tagmania
+
+
+Tagmania is a library which allows for an easy way to manipulate pos-tags (Part of Speech Tags) in an easy to use manner.
+
+##Note about design
+we have currently decided on using the nltk tree structure, because it does inherit from python's list data type  which can be useful. In addition, we tried to build something more hopeful than the rule based matching in nltk, where one can search using both tags/words in a way that is tailored and understandable to linguists. When you don't have time to train a new language model and want to save some time on annontation, or do some research into what types of linguistic phenomenon occurs in text, this could be good library to try out.
+
 
 Tagmania is a mini-language designed for matching or transforming lists consisting of tuples or NLTK trees (henceforth 'chunks'). The transformations tagmania can peform are the following:
  - Replacing the tag of a chunk with a specified tag;
@@ -196,6 +208,10 @@ tagmania_tests.py::test_search_engine[<he> <VP{<was>}>,PRONOUN VERB_COPULA COPUL
 
 ### Some more concrete examples
 
+
+#### Example 1
+
+
 All examples can be found in (tagmania_examples.py)
  
 
@@ -367,14 +383,8 @@ once you run that rule you get the following output...
 
 ```
 
-Which allows for very easy tokenizing.
 
-
-we have currently decided on using the nltk tree structure, because it does inherit from python's list data type  which can be useful. In addition, we tried to build something more hopeful than the rule based matching in nltk, where one can search using both tags/words in a way that is tailored and understandable to linguists. When you don't have time to train a new language model and want to save some time on annontation, or do some research into what types of linguistic phenomenon occurs in text, this could be good library to try out.
-
-
-
-Example 2:
+#### Example 2:
 
 Let's think of another use case where tagmania could be useful. Let's take, for example the difficult problem of identifying agent and action in a sentence with a relative clause. If you take a look in relative_clauses.txt, you will find in the following sentences:
 
@@ -443,9 +453,9 @@ Add additional notes about how to deploy this on a live system
 
 ## Authors
 
-* **Dominic Doyle** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-* **Alex McKenzie** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+* **Dominic Doyle** - *Initial work* - [DomDomDoy](https://github.com/DomDomDoy)
+* **Alex McKenzie** - *Initial work* - [Arrrlex](https://github.com/Arrrlex)
+
 
 ## License
 
@@ -454,6 +464,6 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 ## Acknowledgments
 
 * Big thanks to Alex McKenzie for code review and help with grammar design
-* Big thanks to Assaf Bar-Moshe, the linguist who inspired that library 
+* Big thanks to Assaf Bar-Moshe, the linguist who inspired this library 
 * I also want to thank Sam lavigne for his inspiring NLP experiments, spacy and all other open source contributers out there. 
 

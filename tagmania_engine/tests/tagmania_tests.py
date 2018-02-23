@@ -3,7 +3,7 @@
 
 
 """ 
-for each class, test of individual pattern level as well as group level
+Operator tests
 
 """
 import spacy, sys,pytest 

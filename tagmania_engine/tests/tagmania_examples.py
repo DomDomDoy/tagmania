@@ -103,6 +103,15 @@ def ex1():
         pprint(applied_rules)
         print "----------------------------------------------------\n"
 
+
+def ex3(text=u'this is a test'):
+    tagged,ents = spacy_tag(text)
+    rule = u'<this is a test>,TEST'
+    processor = TagmaniaProcessor(rule)
+    valid, mods, tagged  = processor.transform(tagged)
+    print tagged
+
 if __name__ == '__main__':
    #ex1()
-   ex2()
+   #ex2()
+   ex3()
