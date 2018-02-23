@@ -3,7 +3,65 @@
 Tagmania is a mini-language designed for matching or transforming lists consisting of tuples or NLTK trees (henceforth 'chunks'). The transformations tagmania can peform are the following:
  - Replacing the tag of a chunk with a specified tag;
  - Putting several chunks under one chunk with a specified tag;
- 
+
+## Getting Started
+
+
+1) 
+
+```
+git clone https://github.com/DomDomDoy/tagmania.git 
+```
+
+2) place tagmania repo in project directory
+
+3)
+```
+from tagmania.tagmania_engine import TagmaniaProcessor 
+
+test_rule = u'<this is a test>,TEST'
+tagged = [(u'this', u'DT'), (u'is', u'VBZ'), (u'a', u'DT'), (u'test', u'NN')] 
+
+processor = TagmaniaProcessor(test_rule)
+valid, mods, transformed_input = processor.transform(tagged)
+
+Out:
+[Tree('TEST', [(u'this', u'DT'), (u'is', u'VBZ'), (u'a', u'DT'), (u'test', u'NN')])]
+
+```
+
+
+### Prerequisites
+
+*Tagmania is pos-tag agnostic, so any input is a list of tuples and nltk Trees regardless of the pos-tags used
+
+
+
+
+
+
+### Installing
+
+
+```
+pip install -r requirements.txt
+```
+
+## Running the tests
+To run pytests, go to tests/ and run the following command
+
+```
+pytest -v -m basic tagmania_tests.py
+
+```
+
+to generate the pytest parameters run (look in main in tagmania_tests for more details)
+
+```
+python tagmania_tests.py
+
+```
+
 ### The data
 
 Before we continue, here is a description of the data we are transforming. Abstractly, we are looking at part-of-speech-tagged sentences, parse trees of sentences, and various stages in between. More concretely, what this means is that we have a list of chunks, where a chunk is defined recursively as follows:
@@ -106,15 +164,37 @@ rule_files = ['rule_set1']
 ```
 
 
-### Tag Macros
 
-GET_FIRST_TAG: 
-changes the tags of the capture group to the first tag in the capture group
 
-i.e. 
-<. NN>,GET_FIRST_TAG
+### Break down into end to end tests
 
-### Example
+These tests are meant to check if tagmania's engine is working correctly.
+
+```
+=========================================================================================== test session starts ============================================================================================
+platform linux2 -- Python 2.7.12, pytest-3.2.3, py-1.4.34, pluggy-0.4.0 -- /usr/bin/python
+
+collected 14 items                                                                                                                                                                                         
+tagmania_tests.py::test_search_engine[<DT NN>,Nope] PASSED
+tagmania_tests.py::test_search_engine[<^VB PRP>,Nope] PASSED
+tagmania_tests.py::test_search_engine[<PERIOD$>,Nope] PASSED
+tagmania_tests.py::test_search_engine[<VB|VBZ> PRP|DT,Nope] PASSED
+tagmania_tests.py::test_search_engine[<VB> DT!,Nope] PASSED
+tagmania_tests.py::test_search_engine[<VP{was}>,Nope] PASSED
+tagmania_tests.py::test_search_engine[VP{was}^^<PLACE$>,Tag1] PASSED
+tagmania_tests.py::test_search_engine[<VB> PRP!,Nope] xfail
+tagmania_tests.py::test_search_engine[<a NN|of*>, NER] PASSED
+tagmania_tests.py::test_search_engine[<she VP+>, PRONOUN_COPULA] xfail
+tagmania_tests.py::test_search_engine[<he VP+>, PRONOUN_COPULA] PASSED
+tagmania_tests.py::test_search_engine[<he> <VP{was}>,PRONOUN COPULA] PASSED
+tagmania_tests.py::test_search_engine[he <VP{<was>}>,VERB_COPULA COPULA] PASSED
+tagmania_tests.py::test_search_engine[<he> <VP{<was>}>,PRONOUN VERB_COPULA COPULA] PASSED
+
+=================================================================================== 12 passed, 2 xfailed in 1.26 seconds ===================================================================================
+
+```
+
+### Some more concrete examples
 
 All examples can be found in (tagmania_examples.py)
  
@@ -122,7 +202,7 @@ All examples can be found in (tagmania_examples.py)
 The bill passed 81-18. Sixteen Democrats and two libertarian-minded Republicans voted against it. Among them were a number of potential Democratic presidential candidates in 2020 including Cory Booker, Kirsten Gillibrand, Kamala Harris, Bernie Sanders and Elizabeth Warren.
 
 
-pos_tagged by spacey:
+pos_tagged by spacy:
 
 ```
 
@@ -216,7 +296,7 @@ Tree('CD', [(u'81', u'CD'), (u'-', u'SYM'), (u'18', u'CD')]),
 ```
 or 
 
-let's say you trust the people that the spacey NER spits out , tags, and insert them into the tags, as such: 
+let's say you trust the people that the spacy NER spits out , tags, and insert them into the tags, as such: 
 
 ```
 pers =  [(u'Cory Booker', u'PERSON'),
@@ -227,7 +307,7 @@ pers =  [(u'Cory Booker', u'PERSON'),
 
 ```
 
-so after getting the NER of names from spacey, 
+so after getting the NER of names from spacy, 
 we can insert them into 
 
 ```
@@ -351,16 +431,29 @@ applied rules
  u'Subject that|who|which <Gerund|VBZ|VBP|VBD>^^<VBZ|VBP|VBD>,VP ACTION']
 ```
  
-(to see full output, run tagmania_examples in /tests or see examples_out.txt)  
+(to see full output, run tagmania_examples in /tests)  
 
-So that is the idea, by uploading rules , and tweaking them , one can manipulate pos-tags and use their information, position to extract information that might be important for annotation, or understanding text in general. 
-
-
-Tagmania is very much still in production and the rule processing needs some work. and that is why I humbly am asking anyone interested to contribute. I believe in Tagmania and that it should bring linguists closer together. I wanted to release this very first version to get the juices flowing, (both cranal and alcoholic/non-alcoholic beverages) which by the way you can support, by donating here!
+So that is the idea, by uploading rules , and tweaking them , one can manipulate pos-tags and use their information, position to extract information that might be important for annotation, or understanding text in general.
 
 
- 
 
-### Dependencies 
-nltk,spacy,cytoolz,parsimonious
+## Deployment
+
+Add additional notes about how to deploy this on a live system
+
+## Authors
+
+* **Dominic Doyle** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+* **Alex McKenzie** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
+## Acknowledgments
+
+* Big thanks to Alex McKenzie for code review and help with grammar design
+* Big thanks to Assaf Bar-Moshe, the linguist who inspired that library 
+* I also want to thank Sam lavigne for his inspiring NLP experiments, spacy and all other open source contributers out there. 
 
