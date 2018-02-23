@@ -44,7 +44,7 @@ Out:
 
 ### Prerequisites
 
-Tagmania is pos-tag agnostic, so any input is a list of tuples and nltk Trees regardless of the pos-tags used
+Tagmania is pos-tag agnostic, so any input is a list of tuples and nltk Trees regardless of the pos-tags used, whether it be Penn State Tree Bank or a different set of tags.
 
 ### Installing
 
@@ -100,7 +100,7 @@ tagmania_tests.py::test_search_engine[<he> <VP{<was>}>,PRONOUN VERB_COPULA COPUL
 
 
 
-### The data
+### The Data
 
 Before we continue, here is a description of the data we are transforming. Abstractly, we are looking at part-of-speech-tagged sentences, parse trees of sentences, and various stages in between. More concretely, what this means is that we have a list of chunks, where a chunk is defined recursively as follows:
  - A tuple in the form `(word, tag)`, or:
