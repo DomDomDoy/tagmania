@@ -6,13 +6,12 @@
 # Tagmania
 
 
-Tagmania is a library which allows for an easy way to manipulate pos-tags (Part of Speech Tags) in an easy to use manner.
+Tagmania is a library which allows for an easy way to manipulate pos-tags (Part of Speech Tags) in an easy to use manner. We tried to build something more hopeful than the rule based matching in nltk, where one can search using both tags/words in a way that is tailored and understandable to linguists. When you don't have time to train a new language model and want to save some time on annontation, or do some research into what types of linguistic phenomenon occurs in text, this could be good library to try out.
 
-##Note about design
-we have currently decided on using the nltk tree structure, because it does inherit from python's list data type  which can be useful. In addition, we tried to build something more hopeful than the rule based matching in nltk, where one can search using both tags/words in a way that is tailored and understandable to linguists. When you don't have time to train a new language model and want to save some time on annontation, or do some research into what types of linguistic phenomenon occurs in text, this could be good library to try out.
+Note on design: we have currently decided on using the nltk tree structure, because it does inherit from python's list data type  which can be useful. 
 
 
-Tagmania is a mini-language designed for matching or transforming lists consisting of tuples or NLTK trees (henceforth 'chunks'). The transformations tagmania can peform are the following:
+Tagmania can also be characterized as a mini-language designed for matching or transforming lists consisting of tuples or NLTK trees (henceforth 'chunks'). The transformations tagmania can peform are the following:
  - Replacing the tag of a chunk with a specified tag;
  - Putting several chunks under one chunk with a specified tag;
 
@@ -45,12 +44,7 @@ Out:
 
 ### Prerequisites
 
-*Tagmania is pos-tag agnostic, so any input is a list of tuples and nltk Trees regardless of the pos-tags used
-
-
-
-
-
+Tagmania is pos-tag agnostic, so any input is a list of tuples and nltk Trees regardless of the pos-tags used
 
 ### Installing
 
@@ -60,6 +54,7 @@ pip install -r requirements.txt
 ```
 
 ## Running the tests
+
 To run pytests, go to tests/ and run the following command
 
 ```
