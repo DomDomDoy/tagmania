@@ -53,7 +53,7 @@ Tagmania is pos-tag agnostic, so any input is a list of tuples and nltk Trees re
 pip install -r requirements.txt
 ```
 
-## Running the tests
+## Running The Tests
 
 To run pytests, go to tests/ and run the following command
 
@@ -68,6 +68,37 @@ to generate the pytest parameters run (look in main in tagmania_tests for more d
 python tagmania_tests.py
 
 ```
+
+### Break Down The Tests 
+These tests are meant to check if tagmania's engine is working correctly.
+
+```
+=========================================================================================== test session starts ============================================================================================
+platform linux2 -- Python 2.7.12, pytest-3.2.3, py-1.4.34, pluggy-0.4.0 -- /usr/bin/python
+
+collected 14 items                                                                                                                                                                                         
+tagmania_tests.py::test_search_engine[<DT NN>,Nope] PASSED
+tagmania_tests.py::test_search_engine[<^VB PRP>,Nope] PASSED
+tagmania_tests.py::test_search_engine[<PERIOD$>,Nope] PASSED
+tagmania_tests.py::test_search_engine[<VB|VBZ> PRP|DT,Nope] PASSED
+tagmania_tests.py::test_search_engine[<VB> DT!,Nope] PASSED
+tagmania_tests.py::test_search_engine[<VP{was}>,Nope] PASSED
+tagmania_tests.py::test_search_engine[VP{was}^^<PLACE$>,Tag1] PASSED
+tagmania_tests.py::test_search_engine[<VB> PRP!,Nope] xfail
+tagmania_tests.py::test_search_engine[<a NN|of*>, NER] PASSED
+tagmania_tests.py::test_search_engine[<she VP+>, PRONOUN_COPULA] xfail
+tagmania_tests.py::test_search_engine[<he VP+>, PRONOUN_COPULA] PASSED
+tagmania_tests.py::test_search_engine[<he> <VP{was}>,PRONOUN COPULA] PASSED
+tagmania_tests.py::test_search_engine[he <VP{<was>}>,VERB_COPULA COPULA] PASSED
+tagmania_tests.py::test_search_engine[<he> <VP{<was>}>,PRONOUN VERB_COPULA COPULA] PASSED
+
+=================================================================================== 12 passed, 2 xfailed in 1.26 seconds ===================================================================================
+
+```
+
+
+
+
 
 ### The data
 
@@ -112,7 +143,7 @@ In this rule, every group consists of only one individual pattern, and hence no 
 
 
 
-### Rule structure
+### Rule Structure
 
 A tagmania rule consists of a search pattern, followed by a comma, followed by some tags or tag macros*.
 
@@ -159,7 +190,7 @@ TagmaniaProcessor(rule_class'ref_name_here')
 ```
 
 
-### Adding rule sets 
+### Adding Rule Sets 
 
 A rule set is a file consisiting of  a list of tagmania rules  
 
@@ -168,37 +199,6 @@ and add the following line.
 
 ```
 rule_files = ['rule_set1']
-```
-
-
-
-
-### Break down into end to end tests
-
-These tests are meant to check if tagmania's engine is working correctly.
-
-```
-=========================================================================================== test session starts ============================================================================================
-platform linux2 -- Python 2.7.12, pytest-3.2.3, py-1.4.34, pluggy-0.4.0 -- /usr/bin/python
-
-collected 14 items                                                                                                                                                                                         
-tagmania_tests.py::test_search_engine[<DT NN>,Nope] PASSED
-tagmania_tests.py::test_search_engine[<^VB PRP>,Nope] PASSED
-tagmania_tests.py::test_search_engine[<PERIOD$>,Nope] PASSED
-tagmania_tests.py::test_search_engine[<VB|VBZ> PRP|DT,Nope] PASSED
-tagmania_tests.py::test_search_engine[<VB> DT!,Nope] PASSED
-tagmania_tests.py::test_search_engine[<VP{was}>,Nope] PASSED
-tagmania_tests.py::test_search_engine[VP{was}^^<PLACE$>,Tag1] PASSED
-tagmania_tests.py::test_search_engine[<VB> PRP!,Nope] xfail
-tagmania_tests.py::test_search_engine[<a NN|of*>, NER] PASSED
-tagmania_tests.py::test_search_engine[<she VP+>, PRONOUN_COPULA] xfail
-tagmania_tests.py::test_search_engine[<he VP+>, PRONOUN_COPULA] PASSED
-tagmania_tests.py::test_search_engine[<he> <VP{was}>,PRONOUN COPULA] PASSED
-tagmania_tests.py::test_search_engine[he <VP{<was>}>,VERB_COPULA COPULA] PASSED
-tagmania_tests.py::test_search_engine[<he> <VP{<was>}>,PRONOUN VERB_COPULA COPULA] PASSED
-
-=================================================================================== 12 passed, 2 xfailed in 1.26 seconds ===================================================================================
-
 ```
 
 ### Some more concrete examples
