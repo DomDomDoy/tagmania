@@ -459,5 +459,6 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 ## Acknowledgments
 
 * Big thanks to Assaf Bar-Moshe, the linguist who inspired this library 
-* Big thanks to the github and all the open source libraries out there 
+* Big thanks to Sam Lavigne [antiboredom](https://github.com/antiboredom) for his inspiring NLP experiments
+* Big thanks to  the github and all the open source libraries out there 
 
