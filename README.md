@@ -458,7 +458,6 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
-* Big thanks to Alex McKenzie for code review and help with grammar design
 * Big thanks to Assaf Bar-Moshe, the linguist who inspired this library 
 * Big thanks to the github and all the open source libraries out there 
 
