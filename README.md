@@ -18,15 +18,11 @@ Tagmania can also be characterized as a mini-language designed for matching or t
 ## Getting Started
 
 
-1) 
-
 ```
 git clone https://github.com/DomDomDoy/tagmania.git 
 ```
 
-2) place tagmania repo in project directory
-
-3)
+## Usage 
 ```
 from tagmania.tagmania_engine import TagmaniaProcessor 
 
