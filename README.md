@@ -1,11 +1,12 @@
 
 
 
-# A Non-technical Overview
+# Tagmania: A Non-technical Overview
 
-In the field of Natural Language Processing , a field where the main focus is writing programs that understand language, one very important tool is a POS Tagger, or Part of Speech Tagger. Part of Speech Taggers refer ususally to taking an input text. 
+Tagmania is a library designed for linguists to manipulate part of speech tags. So you may be asking yourself, what are part-of-speech tags and  why is this important?
 
-i.e. 
+In the field of Natural Language Processing , a field where the main focus is writing programs that understand language, one very important tool is a POS Tagger, or Part of Speech Tagger. Part of Speech Taggers refer ususally to taking an input text and outputting the input text with it's pos-tags. 
+
 
 ``` 
 Input Sentence: Today we are learning about part of speech taggers! 
@@ -15,16 +16,16 @@ Output: Today|NOUN we|NOUN are|VERB learning|VERB about|ADP part|NOUN of|ADP spe
 
 This example was taken from an open source NLP library called spacey. If you want to try your own example, please visit the following website: http://textanalysisonline.com/spacy-pos-tagging.  
 
-Part of speech tags add another layer of information to text, making it come to life. There are ; however, some issues surrounding the use of this information reliabily in application development. One example of this is being able to search these two layers of information (text,postag) interchangably. Another issue, focuses on increasing the already high accuracy of pos-tags. 
+Part of speech tags add another layer of information to text, making it come to life. There are ; however, some issues surrounding the use of this information reliabily in application development. One example of this is being able to search these two layers of information (text,pos-tag) interchangably. Another issue, focuses on increasing the already high accuracy of pos-tags. 
 
 
-So what is Tagmania? 
+So what is Tagmania and how does it tackle these issues? 
 
-Tagmania allows you to easily search and manipulate pos-tagged sentences. This library was initally geared towards linguists who have no programming experience, for them to concentrate on looking at linguistic phenomenon opposed to worrying about learning how to code.  
+Tagmania tackles these issues allows users (usually linguists) to write rules. For examples of rules, see 
+more concrete examples section. 
 
 
-
-# Tagmania
+# Tagmania: A Technical Overview
 
 
 Tagmania is a library which allows for an easy way to manipulate pos-tags (Part of Speech Tags) in an easy to use manner. We tried to build something more hopeful than the rule based matching in nltk, where one can search using both tags/words in a way that is tailored and understandable to linguists. When you don't have time to train a new language model and want to save some time on annontation, or do some research into what types of linguistic phenomenon occurs in text, this could be good library to try out.
