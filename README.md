@@ -170,26 +170,19 @@ tagmania_tests.py::test_search_engine[<he> <VP{<was>}>,PRONOUN VERB_COPULA COPUL
 
 ### Some more concrete examples
 
-
-
-```
-
-
-
-
 #### Example 1
 
 
 All examples can be found in (tagmania_examples.py)
  
-
+```
 The bill passed 81-18. Sixteen Democrats and two libertarian-minded Republicans voted against it. Among them were a number of potential Democratic presidential candidates in 2020 including Cory Booker, Kirsten Gillibrand, Kamala Harris, Bernie Sanders and Elizabeth Warren.
-
+```
 
 pos_tagged by spacy:
 
-```
 
+```
 [(u'81-', u'PERCENT'),
  (u'Sixteen', u'CARDINAL'),
  (u'Democrats', u'NORP'),
