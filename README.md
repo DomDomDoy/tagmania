@@ -290,12 +290,12 @@ we can insert them into
 ```
 
 for text,tag in pers:
-	<text>,PERSON
+    <text>,PERSON
 ```
 Now imagine, we want to be able to group PERSONS and call them a PERSON_LISTING  
-
+```
 <(PERSON COMMA PERSON)+>,PERSON_LISTING  
-
+```
 
 taking a look at the output of our rule set we get the following: 
 ```
