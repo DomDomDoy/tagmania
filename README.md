@@ -15,21 +15,12 @@ Output: Today|NOUN we|NOUN are|VERB learning|VERB about|ADP part|NOUN of|ADP spe
 
 This example was taken from an open source NLP library called spacey. If you want to try your own example, please visit the following website: http://textanalysisonline.com/spacy-pos-tagging.  
 
-Part of speech tags add another layer of information to text, making it come to life. There are ; however, some issues surrounding using this information reliabily in application development. The main issue is not having a reliable way to search these two layers of information (text,postag) interchangably. Another issue of lesser importance, focuses on increasing the already high accuracy of pos-tags. Let's look at an example using the same website above. 
-
-```  
-Input Sentence: Running is fun. 
-Output: Running|VERB is|VERB fun|ADJ .|PUNCT
-``` 
-So let's say we wanted to 
-
+Part of speech tags add another layer of information to text, making it come to life. There are ; however, some issues surrounding using this information reliabily in application development. The main issue is not having a reliable way to search these two layers of information (text,postag) interchangably. Another issue of lesser importance, focuses on increasing the already high accuracy of pos-tags. 
 
 
 So what is Tagmania? 
 
-Tagmania allows you to easily search and manipulate these pos-tagged sentences. This library was initally geared towards linguists who have no programming experience, for them to concentrate on looking at linguistic phenomenon opposed to worrying about learning how to code. 
-
-
+Tagmania allows you to easily search and manipulate these pos-tagged sentences. This library was initally geared towards linguists who have no programming experience, for them to concentrate on looking at linguistic phenomenon opposed to worrying about learning how to code.  
 
 
 
