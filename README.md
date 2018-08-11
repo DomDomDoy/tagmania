@@ -285,16 +285,16 @@ pers =  [(u'Cory Booker', u'PERSON'),
 ```
 
 so after getting the NER of names from spacy, 
-we can insert them into 
+we can insert them into the rules list 
 
 ```
-
-for text,tag in pers:
-    <text>,PERSON
+rules = []
+rules += ["<{0}>,PERSON".format(text) for text,tag in pers]
+    
 ```
-Now imagine, we want to be able to group PERSONS and call them a PERSON_LISTING  
+Now imagine, we want to be able to group PERSONS and call them a PERSON_LISTING, we add the following rule to the above rules.  
 ```
-<(PERSON COMMA PERSON)+>,PERSON_LISTING  
+rules.append('<(PERSON COMMA PERSON)+>,PERSON_LISTING') 
 ```
 
 taking a look at the output of our rule set we get the following: 
@@ -412,7 +412,6 @@ So that is the idea, by uploading rules , and tweaking them , one can manipulate
 
 * **Dominic Doyle** - *Initial work* - [DomDomDoy](https://github.com/DomDomDoy)
 * **Alex McKenzie** - *Initial work* - [Arrrlex](https://github.com/Arrrlex)
-
 
 
 ## Acknowledgments
