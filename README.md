@@ -1,12 +1,14 @@
-
-
-
 # Tagmania: A Non-technical Overview
 
-Tagmania is a library designed for linguists to manipulate part of speech tags. So you may be asking yourself, what are part-of-speech tags and  why is this important?
+Tagmania is a library designed for linguists to manipulate part of speech tags. So there may be a couple questions you are asking yourself such as: 
+
+what are part-of-speech tags?  
+why is this important?
 
 In the field of Natural Language Processing , a field where the main focus is writing programs that understand language, one very important tool is a POS Tagger, or Part of Speech Tagger. Part of Speech Taggers refer ususally to taking an input text and outputting the input text with it's pos-tags. 
 
+
+Here is an example:
 
 ``` 
 Input Sentence: Today we are learning about part of speech taggers! 
@@ -14,105 +16,27 @@ Output: Today|NOUN we|NOUN are|VERB learning|VERB about|ADP part|NOUN of|ADP spe
 
 ``` 
 
-This example was taken from an open source NLP library called spacey. If you want to try your own example, please visit the following website: http://textanalysisonline.com/spacy-pos-tagging.  
+This example was taken from an open source NLP library called Spacey. If you want to try your own example, please visit the following website: [Online Text Analysis](http://textanalysisonline.com/spacy-pos-tagging)
 
 Part of speech tags add another layer of information to text, making it come to life. There are ; however, some issues surrounding the use of this information reliabily in application development. One example of this is being able to search these two layers of information (text,pos-tag) interchangably. Another issue, focuses on increasing the already high accuracy of pos-tags. 
 
 
 So what is Tagmania and how does it tackle these issues? 
 
-Tagmania tackles these issues allowing users (usually linguists) to write rules. For examples of rules, see 
- ***Some more concrete examples***. 
+Tagmania tackles these issues allowing users (usually linguists) to write rules. For examples of rules, see section
+ ***Some more concrete examples*** below. 
 
 
 # Tagmania: A Technical Overview
 
 
-Tagmania is a library which allows for an easy way to manipulate pos-tags (Part of Speech Tags) in an easy to use manner. We tried to build something more hopeful than the rule based matching in nltk, where one can search using both tags/words in a way that is tailored and understandable to linguists. When you don't have time to train a new language model and want to save some time on annotation, or do some research into what types of linguistic phenomenon occurs in text, this could be good library to try out.
-
-Tagmania can also be characterized as a mini-language designed for matching or transforming lists consisting of tuples or NLTK trees (henceforth 'chunks'). The transformations tagmania can peform are the following:
+Tagmania can be defined as a mini-language designed for matching or transforming lists consisting of tuples or NLTK trees (henceforth 'chunks'). The transformations tagmania can peform are the following:
  - Replacing the tag of a chunk with a specified tag;
- - Putting several chunks under one chunk with a specified tag;
-
-## Getting Started
-
-
-```
-git clone https://github.com/DomDomDoy/tagmania.git 
-```
-
-## Usage 
-```
-from tagmania.tagmania_engine import TagmaniaProcessor 
-
-test_rule = u'<this is a test>,TEST'
-tagged = [(u'this', u'DT'), (u'is', u'VBZ'), (u'a', u'DT'), (u'test', u'NN')] 
-
-processor = TagmaniaProcessor(test_rule)
-valid, mods, transformed_input = processor.transform(tagged)
-
-Out:
-[Tree('TEST', [(u'this', u'DT'), (u'is', u'VBZ'), (u'a', u'DT'), (u'test', u'NN')])]
-
-```
-
-Tagmania is pos-tag agnostic, so any input is a list of tuples and nltk Trees regardless of the pos-tags used, whether it be Penn State Tree Bank or a different set of tags.
-
-### Installing
-
-
-```
-pip install -r requirements.txt
-```
-
-## Running The Tests
-
-To run pytests, go to tests/ and run the following command
-
-```
-pytest -v -m basic tagmania_tests.py
-
-```
-
-to generate the pytest parameters run (look in main in tagmania_tests for more details)
-
-```
-python tagmania_tests.py
-
-```
-
-### Break Down The Tests 
-These tests are meant to check if tagmania's engine is working correctly.
-
-```
-=========================================================================================== test session starts ============================================================================================
-platform linux2 -- Python 2.7.12, pytest-3.2.3, py-1.4.34, pluggy-0.4.0 -- /usr/bin/python
-
-collected 14 items                                                                                                                                                                                         
-tagmania_tests.py::test_search_engine[<DT NN>,Nope] PASSED
-tagmania_tests.py::test_search_engine[<^VB PRP>,Nope] PASSED
-tagmania_tests.py::test_search_engine[<PERIOD$>,Nope] PASSED
-tagmania_tests.py::test_search_engine[<VB|VBZ> PRP|DT,Nope] PASSED
-tagmania_tests.py::test_search_engine[<VB> DT!,Nope] PASSED
-tagmania_tests.py::test_search_engine[<VP{was}>,Nope] PASSED
-tagmania_tests.py::test_search_engine[VP{was}^^<PLACE$>,Tag1] PASSED
-tagmania_tests.py::test_search_engine[<VB> PRP!,Nope] xfail
-tagmania_tests.py::test_search_engine[<a NN|of*>, NER] PASSED
-tagmania_tests.py::test_search_engine[<she VP+>, PRONOUN_COPULA] xfail
-tagmania_tests.py::test_search_engine[<he VP+>, PRONOUN_COPULA] PASSED
-tagmania_tests.py::test_search_engine[<he> <VP{was}>,PRONOUN COPULA] PASSED
-tagmania_tests.py::test_search_engine[he <VP{<was>}>,VERB_COPULA COPULA] PASSED
-tagmania_tests.py::test_search_engine[<he> <VP{<was>}>,PRONOUN VERB_COPULA COPULA] PASSED
-
-=================================================================================== 12 passed, 2 xfailed in 1.26 seconds ===================================================================================
-
-```
+ - Putting several chunks under one chunk with a specified tag; 
 
 
 
-
-
-### The Data
+### Input
 
 Before we continue, here is a description of the data we are transforming. Abstractly, we are looking at part-of-speech-tagged sentences, parse trees of sentences, and various stages in between. More concretely, what this means is that we have a list of chunks, where a chunk is defined recursively as follows:
  - A tuple in the form `(word, tag)`, or:
@@ -165,55 +89,92 @@ Each group consists of delimiter-separated individual patterns, which are intend
 
 Each individual pattern consists of the words or tags to match (`.`, a word, or several words separated by pipes), and optionally a lookinside, which is an entire search pattern enclosed in braces meant to be recursively applied to the contents of one chunk. The individual patterns can also feature an operator and anchors.
 
-### Declaring variables
-
-Imagine you would like to search for a list of words, but within the framework of tagmania. I.e. Instead of writing 
-
-<summer|winter|spring|fall|autumn>,SEASON 
-
-you could just write SEASON,without running this rule. 
 
 
-Steps
 
-1) create csv file called SEASON.csv 
-2) place file under tagmania_constants  
-3) now in __init__.py in the tagmania_constants directory , add the following lines: 
 
-```
-constant_varnames['ref_name_here'] = ['SEASONS'] 
+# How To
+
+
+
+
+
+## Getting Started
 ```
 
-then add the following function: 
-
-```
-def load_ref_name_here_constants():
-    return {var_name: load_const(var_name) for var_name in constant_varnames['ref_name_here']}
+git clone https://github.com/DomDomDoy/tagmania.git 
+pip install -r requirements.txt
 ```
 
-and then finally 
+## How To Run A Single Rule
+```
+from tagmania.tagmania_engine import TagmaniaProcessor 
+
+test_rule = u'<this is a test>,TEST'
+tagged = [(u'this', u'DT'), (u'is', u'VBZ'), (u'a', u'DT'), (u'test', u'NN')] 
+
+processor = TagmaniaProcessor(test_rule)
+valid, mods, transformed_input = processor.transform(tagged)
+
+Out:
+[Tree('TEST', [(u'this', u'DT'), (u'is', u'VBZ'), (u'a', u'DT'), (u'test', u'NN')])]
 
 ```
-constant_factory_dict['ref_name_here'] = load_ref_name_here_constants
-```
+
+Tagmania is pos-tag agnostic, so any input is a list of tuples and nltk Trees regardless of the pos-tags used, whether it be [Penn State Tree Bank](https://www.ling.upenn.edu/courses/Fall_2003/ling001/penn_treebank_pos.html) or a different set of tags. 
+
+
+## Running The Tests
+
+To run pytests, go to tests/ and run the following command
 
 ```
-TagmaniaProcessor(rule_class'ref_name_here')
-```
-
-
-### Adding Rule Sets 
-
-A rule set is a file consisiting of  a list of tagmania rules  
-
-To add a new rule set, i.e. rule_set1 , in the "rules" directory, open __init__.py
-and add the following line.
+pytest -v -m basic tagmania_tests.py
 
 ```
-rule_files = ['rule_set1']
+
+to generate the pytest parameters run (look in main in tagmania_tests for more details)
+
 ```
+python tagmania_tests.py
+
+```
+
+### Break Down The Tests 
+These tests are meant to check if tagmania's engine is working correctly.
+
+```
+=========================================================================================== test session starts ============================================================================================
+platform linux2 -- Python 2.7.12, pytest-3.2.3, py-1.4.34, pluggy-0.4.0 -- /usr/bin/python
+
+collected 14 items                                                                                                                                                                                         
+tagmania_tests.py::test_search_engine[<DT NN>,Nope] PASSED
+tagmania_tests.py::test_search_engine[<^VB PRP>,Nope] PASSED
+tagmania_tests.py::test_search_engine[<PERIOD$>,Nope] PASSED
+tagmania_tests.py::test_search_engine[<VB|VBZ> PRP|DT,Nope] PASSED
+tagmania_tests.py::test_search_engine[<VB> DT!,Nope] PASSED
+tagmania_tests.py::test_search_engine[<VP{was}>,Nope] PASSED
+tagmania_tests.py::test_search_engine[VP{was}^^<PLACE$>,Tag1] PASSED
+tagmania_tests.py::test_search_engine[<VB> PRP!,Nope] xfail
+tagmania_tests.py::test_search_engine[<a NN|of*>, NER] PASSED
+tagmania_tests.py::test_search_engine[<she VP+>, PRONOUN_COPULA] xfail
+tagmania_tests.py::test_search_engine[<he VP+>, PRONOUN_COPULA] PASSED
+tagmania_tests.py::test_search_engine[<he> <VP{was}>,PRONOUN COPULA] PASSED
+tagmania_tests.py::test_search_engine[he <VP{<was>}>,VERB_COPULA COPULA] PASSED
+tagmania_tests.py::test_search_engine[<he> <VP{<was>}>,PRONOUN VERB_COPULA COPULA] PASSED
+
+=================================================================================== 12 passed, 2 xfailed in 1.26 seconds ===================================================================================
+
+```
+
 
 ### Some more concrete examples
+
+
+
+```
+
+
 
 
 #### Example 1
@@ -454,19 +415,12 @@ So that is the idea, by uploading rules , and tweaking them , one can manipulate
 
 
 
-## Deployment
-
-Add additional notes about how to deploy this on a live system
-
 ## Authors
 
 * **Dominic Doyle** - *Initial work* - [DomDomDoy](https://github.com/DomDomDoy)
 * **Alex McKenzie** - *Initial work* - [Arrrlex](https://github.com/Arrrlex)
 
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
 ## Acknowledgments
 
