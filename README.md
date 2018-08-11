@@ -21,14 +21,14 @@ Part of speech tags add another layer of information to text, making it come to 
 
 So what is Tagmania and how does it tackle these issues? 
 
-Tagmania tackles these issues allows users (usually linguists) to write rules. For examples of rules, see 
-more concrete examples section. 
+Tagmania tackles these issues allowing users (usually linguists) to write rules. For examples of rules, see 
+ ***Some more concrete examples***. 
 
 
 # Tagmania: A Technical Overview
 
 
-Tagmania is a library which allows for an easy way to manipulate pos-tags (Part of Speech Tags) in an easy to use manner. We tried to build something more hopeful than the rule based matching in nltk, where one can search using both tags/words in a way that is tailored and understandable to linguists. When you don't have time to train a new language model and want to save some time on annontation, or do some research into what types of linguistic phenomenon occurs in text, this could be good library to try out.
+Tagmania is a library which allows for an easy way to manipulate pos-tags (Part of Speech Tags) in an easy to use manner. We tried to build something more hopeful than the rule based matching in nltk, where one can search using both tags/words in a way that is tailored and understandable to linguists. When you don't have time to train a new language model and want to save some time on annotation, or do some research into what types of linguistic phenomenon occurs in text, this could be good library to try out.
 
 Tagmania can also be characterized as a mini-language designed for matching or transforming lists consisting of tuples or NLTK trees (henceforth 'chunks'). The transformations tagmania can peform are the following:
  - Replacing the tag of a chunk with a specified tag;
@@ -55,9 +55,6 @@ Out:
 [Tree('TEST', [(u'this', u'DT'), (u'is', u'VBZ'), (u'a', u'DT'), (u'test', u'NN')])]
 
 ```
-
-
-### Prerequisites
 
 Tagmania is pos-tag agnostic, so any input is a list of tuples and nltk Trees regardless of the pos-tags used, whether it be Penn State Tree Bank or a different set of tags.
 
