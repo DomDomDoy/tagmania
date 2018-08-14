@@ -273,7 +273,7 @@ Tree('CD', [(u'81', u'CD'), (u'-', u'SYM'), (u'18', u'CD')]),
 ```
 or 
 
-let's say you trust the people that the spacy NER spits out , tags, and insert them into the tags, as such: 
+let's say you trust the people that the spacy [NER](https://en.wikipedia.org/wiki/Named-entity_recognition) spits out , tags, and insert them into the tags, as such: 
 
 ```
 pers =  [(u'Cory Booker', u'PERSON'),
