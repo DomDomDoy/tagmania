@@ -284,7 +284,7 @@ pers =  [(u'Cory Booker', u'PERSON'),
 
 ```
 
-so after getting the NER of names from spacy, 
+so after getting the (NER) [https://en.wikipedia.org/wiki/Named-entity_recognition] of names from spacy, 
 we can insert them into the rules list 
 
 ```
@@ -371,8 +371,7 @@ Subject <Gerund|VBZ|VBP|VBD>, ACTION
 ```
 I can start to write rules based on linguistic phenomenon , to manipulate the tags accordingly. 
 as seen. 
-
-i.e. 
+ 
 In:
 
 ```
