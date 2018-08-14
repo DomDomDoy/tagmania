@@ -273,21 +273,16 @@ Tree('CD', [(u'81', u'CD'), (u'-', u'SYM'), (u'18', u'CD')]),
 ```
 or 
 
-let's say you trust the people that the spacy [NER](https://en.wikipedia.org/wiki/Named-entity_recognition) spits out , tags, and insert them into the tags, as such: 
+let's say you trust the people that the spacy [NER](https://en.wikipedia.org/wiki/Named-entity_recognition) outputs. We can now create tuples accordingly and insert them into the tagmania rule list: 
 
 ```
+#output from spacey
 pers =  [(u'Cory Booker', u'PERSON'),
  (u'Kirsten Gillibrand', u'PERSON'),
  (u'Kamala Harris', u'PERSON'),
  (u'Bernie Sanders', u'ORG'),
  (u'Elizabeth Warren', u'PERSON')]
 
-```
-
-so after getting the (NER) [https://en.wikipedia.org/wiki/Named-entity_recognition] of names from spacy, 
-we can insert them into the rules list 
-
-```
 rules = []
 rules += ["<{0}>,PERSON".format(text) for text,tag in pers]
     
